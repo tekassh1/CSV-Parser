@@ -1,5 +1,5 @@
-CMakeFiles/YadroCSV.dir/src/Main.cpp.obj: \
- D:\Other\C++\ Scripts\Yadro\src\Main.cpp \
+CMakeFiles/YadroCSV.dir/src/CSVReader.cpp.obj: \
+ D:\Other\C++\ Scripts\Yadro\src\CSVReader.cpp \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/iostream \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/requires_hosted.h \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -142,9 +142,9 @@ CMakeFiles/YadroCSV.dir/src/Main.cpp.obj: \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/ostream.tcc \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/istream \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/istream.tcc \
+ D:/Other/C++\ Scripts/Yadro/include/CSVReader.hpp \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/fstream \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/codecvt.h \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/x86_64-w64-mingw32/bits/basic_file.h \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/x86_64-w64-mingw32/bits/c++io.h \
- D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/fstream.tcc \
- D:/Other/C++\ Scripts/Yadro/include/CSVReader.hpp
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/fstream.tcc

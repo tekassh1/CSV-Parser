@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 
+#include "CSVReader.hpp"
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -10,8 +12,7 @@ int main(int argc, char* argv[]) {
         cout << "\nYou should input path to .csv file to the program arg. Try again.\n\n";
         return 0;
     }
-
-    string file_path = argv[1];
-    ifstream fin;
-    FILE* file;
+    
+    CSVReader csv_reader(argv[1]);
+    cout << csv_reader.checkFile() << endl;
 }

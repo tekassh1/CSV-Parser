@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/Other/C++ Scripts/Yadro/src/CSVReader.cpp" "CMakeFiles/YadroCSV.dir/src/CSVReader.cpp.obj" "gcc" "CMakeFiles/YadroCSV.dir/src/CSVReader.cpp.obj.d"
   "D:/Other/C++ Scripts/Yadro/src/Main.cpp" "CMakeFiles/YadroCSV.dir/src/Main.cpp.obj" "gcc" "CMakeFiles/YadroCSV.dir/src/Main.cpp.obj.d"
   )
 

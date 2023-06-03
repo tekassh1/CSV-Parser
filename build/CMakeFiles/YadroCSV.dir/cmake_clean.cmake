@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/YadroCSV.dir/src/CSVReader.cpp.obj"
+  "CMakeFiles/YadroCSV.dir/src/CSVReader.cpp.obj.d"
   "CMakeFiles/YadroCSV.dir/src/Main.cpp.obj"
   "CMakeFiles/YadroCSV.dir/src/Main.cpp.obj.d"
   "YadroCSV.exe"
