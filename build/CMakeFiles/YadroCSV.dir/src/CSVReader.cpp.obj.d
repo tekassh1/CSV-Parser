@@ -142,9 +142,14 @@ CMakeFiles/YadroCSV.dir/src/CSVReader.cpp.obj: \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/ostream.tcc \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/istream \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/istream.tcc \
- D:/Other/C++\ Scripts/Yadro/include/CSVReader.hpp \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/fstream \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/codecvt.h \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/x86_64-w64-mingw32/bits/basic_file.h \
  D:/Tools/MSYS2/mingw64/include/c++/13.1.0/x86_64-w64-mingw32/bits/c++io.h \
- D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/fstream.tcc
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/fstream.tcc \
+ D:/Other/C++\ Scripts/Yadro/include/CSVReader.hpp \
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/vector \
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/stl_uninitialized.h \
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/stl_vector.h \
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/stl_bvector.h \
+ D:/Tools/MSYS2/mingw64/include/c++/13.1.0/bits/vector.tcc

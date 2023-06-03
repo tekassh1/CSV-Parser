@@ -14,5 +14,13 @@ int main(int argc, char* argv[]) {
     }
     
     CSVReader csv_reader(argv[1]);
-    cout << csv_reader.checkFile() << endl;
+
+    if (!csv_reader.checkFile()) {
+        cout << "\nFile doesn't exists or doesn't acceptable. Try again.\n";
+        return 0;
+    }
+
+    csv_reader.parseCSV();
+    cout << endl << " --- Input Table --- " << endl;
+    cout << csv_reader.getStringTableRepresentation() << endl;
 }
