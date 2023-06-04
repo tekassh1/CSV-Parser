@@ -1,3 +1,0 @@
-D:/Other/C++ Scripts/Yadro/build/CMakeFiles/YadroCSV.dir
-D:/Other/C++ Scripts/Yadro/build/CMakeFiles/edit_cache.dir
-D:/Other/C++ Scripts/Yadro/build/CMakeFiles/rebuild_cache.dir

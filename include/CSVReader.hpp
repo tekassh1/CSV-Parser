@@ -1,10 +1,11 @@
-#ifndef CSVReader_H
-#define CSVReader_H
+#pragma once
 
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
+
+#include "TableContainer.hpp"
 
 using namespace std;
 
@@ -12,19 +13,18 @@ class CSVReader{
     char* file_name;
     FILE* file;
     string csv_data;
-    vector<vector<string>> input_table;
+    TableContainer table_container;
 
+    bool isNumber(string input);
+    bool isOperation(string input);
     vector<string> commaSplit(string line);
 
 public:
     CSVReader(char* file_name);
 
     bool checkFile();
-    void parseCSV();
+    bool parseCSV();
 
-    FILE* getFile();
     vector<vector<string>> getInputTable();
-    string getStringTableRepresentation();
+    string show();
 };
-
-#endif

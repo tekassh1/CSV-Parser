@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <regex>
 
 #include "CSVReader.hpp"
 
@@ -17,6 +18,41 @@ bool CSVReader::checkFile(){
     else {
         return false;
     }   
+}
+
+bool CSVReader::parseCSV(){
+    ifstream ifs(file_name);
+    string line;
+
+    bool is_first = true;
+    if (ifs.is_open()){
+        while (getline(ifs, line)) {
+            if (is_first) {
+                vector<string> columns = commaSplit(line);
+                columns.erase(columns.begin());
+                table_container.addColumns(columns);
+                is_first = false;
+                continue;
+            }
+
+            vector<string> values = commaSplit(line);
+            string touple_number = values[0];
+            table_container.addToupleNumber(touple_number);
+            values.erase(values.begin());
+
+            if (values.size() > table_container.getColumns().size())
+                return false;
+
+            for (int i = 0; i < values.size(); i++) {
+                if (!isNumber(values[i]) && !isOperation(values[i])) {
+                    values[i] = "#ЗНАЧ!";
+                }
+                table_container.addElem(table_container.getColumns()[i], touple_number, values[i]);
+            }
+        }
+        ifs.close();
+    }
+    return true;
 }
 
 vector<string> CSVReader::commaSplit(string line){
@@ -37,37 +73,43 @@ vector<string> CSVReader::commaSplit(string line){
     return out;
 }
 
-void CSVReader::parseCSV(){
-    ifstream ifs(file_name);
-    string line;
+string CSVReader::show(){
+    vector<string> columns = table_container.getColumns();
+    vector<string> touples = table_container.getToupleNumbers();
+    string res = "";
+    res += "\t\t";
 
-    if (ifs.is_open()){
-        while (getline(ifs, line)) {
-            vector<string> splitted_line;
-            splitted_line = commaSplit(line);
-            input_table.push_back(splitted_line);
-        }
+    for (int i = 0; i < columns.size(); i++){
+            res += columns[i];
+            if (i != columns.size() - 1)
+                res += ",\t\t";
     }
-    ifs.close();
-}
+    res += "\n";
 
-FILE* CSVReader::getFile(){
-    return this->file;
-}
-
-vector<vector<string>> CSVReader::getInputTable() {
-    return input_table;
-}
-
-string CSVReader::getStringTableRepresentation(){
-    string res;
-    for (int i = 0; i < input_table.size(); i++){
-        string tmp;
-        for (int j = 0; j < input_table[i].size(); j++) {
-            tmp += (j == 0 ? input_table[i][j] : "\t" + input_table[i][j]);
+    for (int i = 0; i < touples.size(); i++){
+        res += touples[i];
+        for (int j = 0; j < columns.size(); j++){
+            res += "\t\t" + table_container.getElem(columns[j], touples[i]);
+            if (j != columns.size() - 1)
+                res += ",";
         }
-        res += tmp + "\n";
-        tmp = "";
+        res += "\n";
     }
     return res;
+}
+
+bool CSVReader::isNumber(string input){
+    for (int i = 0; i < input.length(); i++){
+        if (!isdigit(input[0])) {
+            if (i == 0 && (input[0] == '-'))
+                continue;
+            return false;
+        }
+    }
+    return true;
+}
+
+bool CSVReader::isOperation(string input){
+    regex expr("^=[a-zA-Z]+[0-9]+[+*/\-][a-zA-Z]+[0-9]+$");
+    return regex_match(input, expr);
 }

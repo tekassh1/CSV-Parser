@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <regex>
 
 #include "CSVReader.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-
     if (argc <= 1) {
         cout << "\nYou should input path to .csv file to the program arg. Try again.\n\n";
         return 0;
@@ -21,6 +21,6 @@ int main(int argc, char* argv[]) {
     }
 
     csv_reader.parseCSV();
-    cout << endl << " --- Input Table --- " << endl;
-    cout << csv_reader.getStringTableRepresentation() << endl;
+    cout << endl << "\t\t --- Input Table --- \n" << endl;
+    cout << csv_reader.show() << endl << endl;
 }
