@@ -20,7 +20,11 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
-    csv_reader.parseCSV();
-    cout << endl << "\t\t --- Input Table --- \n" << endl;
-    cout << csv_reader.show() << endl << endl;
+    bool parse_res = csv_reader.parseCSV();
+    if (parse_res == false) {
+        cout << "\n\nIncorrect CSV table data! Try again.\n\n";
+        return 0;
+    }
+    csv_reader.calculateCells();
+    cout << endl << endl << csv_reader.show() << endl << endl;
 }
