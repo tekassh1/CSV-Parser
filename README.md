@@ -6,11 +6,13 @@
 2) Run ```cmake -G "MinGW Makefiles" ../CmakeLists.txt``` command
 3) Run ```make``` command
 4) Executable (.exe) file will appear in `/build` directory
+5) Run .exe with path to .csv file in argument
 
-This console app parses ```.csv``` file, and counting cells, if they contain an operation.
+This console app parses ```.csv``` file, and counting cells, if they contain an operation
+
 Example:
 
-Input table
+**Input table**
 ```
             A,          B,          C,          D,          E,          F,          G,
 1,          5,          2,          3,          3,          =A1*G3,     1,          0,
@@ -21,7 +23,7 @@ Input table
 6,          16,         17,         18,         16,         17,         18,         =C2/G5,
 ```
 
-Result table
+**Result table**
 ```
             A,          B,          C,          D,          E,          F,          G,
 1,          5,          2,          3,          3,          30,         1,          0,
@@ -41,5 +43,6 @@ Result table
 2) Выполните команду ```cmake -G "MinGW Makefiles" ../CmakeLists.txt```
 3) Выполните команду ```make```
 4) Исполняесый файл программы (.exe) появится в директории `/build`
+5) Запустите .exe указав путь до .csv в качестве аргумента
 
 by https://github.com/tekassh1
