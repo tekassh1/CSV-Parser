@@ -13,9 +13,11 @@ class TableContainer{
 
 public:
     void addElem(string column, string touple, string val);
+    void addElem(string key, string val);
     void removeElem(string key);
     string getElem(string column, string touple);
     string getElem(string key);
+    bool isExists(string key);
     void addColumns(vector<string>& columns);
     void addToupleNumber(string touple_number);
 

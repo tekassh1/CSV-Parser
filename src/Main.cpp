@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
     CSVReader csv_reader(argv[1]);
 
     if (!csv_reader.checkFile()) {
-        cout << "\nFile doesn't exists or doesn't acceptable. Try again.\n";
+        cout << "\nFile doesn't exists or doesn't acceptable. Try again.\n\n";
         return 0;
     }
 
@@ -25,6 +25,10 @@ int main(int argc, char* argv[]) {
         cout << "\n\nIncorrect CSV table data! Try again.\n\n";
         return 0;
     }
+    cout << endl << endl << "Input table"<< endl << endl;
+    csv_reader.show();
     csv_reader.calculateCells();
-    cout << endl << endl << csv_reader.show() << endl << endl;
+    cout << endl << endl << "Result table"<< endl << endl;
+    csv_reader.show();
+    cout << endl << endl;
 }

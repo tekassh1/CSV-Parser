@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <regex>
+#include <iomanip>
 
 #include "CSVReader.hpp"
 
@@ -49,7 +50,7 @@ bool CSVReader::parseCSV(){
 
             for (int i = 0; i < values.size(); i++) {
                 if (!isNumber(values[i]) && !isOperation(values[i])) {
-                    values[i] = "#ЗНАЧ!";
+                    values[i] = "#VALUE!";
                 }
                 table_container.addElem(table_container.getColumns()[i], touple_number, values[i]);
             }
@@ -72,29 +73,23 @@ vector<string> CSVReader::commaSplit(string line){
     return out;
 }
 
-string CSVReader::show(){
+void CSVReader::show(){
     vector<string> columns = table_container.getColumns();
     vector<string> touples = table_container.getToupleNumbers();
-    string res = "";
-    res += "\t\t";
 
-    for (int i = 0; i < columns.size(); i++){
-            res += columns[i];
-            if (i != columns.size() - 1)
-                res += ",\t\t";
-    }
-    res += "\n";
+    cout << setw(12) << left << "  ";
+    for (int i = 0; i < columns.size(); i++)
+            cout << setw(12) << left << columns[i] + ',';
+    cout << endl;
 
     for (int i = 0; i < touples.size(); i++){
-        res += touples[i];
+        cout << setw(12) << left << touples[i] + ',';
         for (int j = 0; j < columns.size(); j++){
-            res += "\t\t" + table_container.getElem(columns[j], touples[i]);
-            if (j != columns.size() - 1)
-                res += ",";
+            string val = table_container.getElem(columns[j], touples[i]);
+            cout << setw(12) << left << val + ',';
         }
-        res += "\n";
+        cout << endl;
     }
-    return res;
 }
 
 bool CSVReader::isNumber(string input){
@@ -123,7 +118,7 @@ void CSVReader::calculateCells(){
             string column = columns[j];
 
             string elem = table_container.getElem(column, touple);
-            if (elem == "#ЗНАЧ!")
+            if (elem == "#VALUE!")
                 continue;
             
             if (isOperation(elem)){
@@ -141,9 +136,12 @@ void CSVReader::calculateCells(){
 string CSVReader::performCalculation(string key){
     vector<string> values;
     string elem = table_container.getElem(key);
+    calculate_rec_calls.insert(key);
 
-    if (elem == "#ЗНАЧ!")
-        return "#ЗНАЧ!";
+    if (elem == "#VALUE!") {
+        calculate_rec_calls.erase(key);
+        return "#VALUE!";
+    }
 
     char op;
     int sep_pos;
@@ -152,50 +150,72 @@ string CSVReader::performCalculation(string key){
         sep_pos = elem.find('+');
         op = '+';
     }
-    if (elem.find('-') != string::npos) {
+    else if (elem.find('-') != string::npos) {
         sep_pos = elem.find('-');
         op = '-';
     }
-    if (elem.find('*') != string::npos) {
+    else if (elem.find('*') != string::npos) {
         sep_pos = elem.find('*');
         op = '*';
     }
-    if (elem.find('/') != string::npos) {
+    else if (elem.find('/') != string::npos) {
         sep_pos = elem.find('/');
         op = '/';
     }
 
-    string cell1 = elem.substr(1, sep_pos - 1);
-    string cell2 = elem.substr(sep_pos + 1, elem.length());
+    string cell1_addr = elem.substr(1, sep_pos - 1);
+    string cell2_addr = elem.substr(sep_pos + 1, elem.length());
 
-    string cell1_content = table_container.getElem(cell1);
-    string cell2_content = table_container.getElem(cell2);
+    if (!table_container.isExists(cell1_addr))
+        return "#VALUE!";
+    if (!table_container.isExists(cell2_addr))
+        return "#VALUE!";
+
+    string cell1_content = table_container.getElem(cell1_addr);
+    string cell2_content = table_container.getElem(cell2_addr);
 
     int num1;
     int num2;
 
     // If cells that we need to operate are operations (recursive count and check for cycle)
     if (isOperation(cell1_content)){
-        calculate_rec_calls.insert(cell1_content);
-        string op_rec = performCalculation(cell1_content);
-        calculate_rec_calls.erase(cell1_content);
-        if (op_rec == "#ЗНАЧ!") {
-            
+        if (calculate_rec_calls.find(cell1_addr) != calculate_rec_calls.end()){
+            calculate_rec_calls.erase(key);
+            return "#VALUE!";
+        }
+        string op_rec = performCalculation(cell1_addr);
+
+        if (op_rec == "#VALUE!") {
+            calculate_rec_calls.erase(key);
+            return op_rec;
         }
         else {
             cell1_content = op_rec;
         }
     }
+    else if (cell1_content == "#VALUE!") {
+        calculate_rec_calls.erase(key);
+            return "#VALUE!";
+    }
+
     if (isOperation(cell2_content)){
-        calculate_rec_calls.insert(cell2_content);
-        string op_rec = performCalculation(cell2_content);
-        calculate_rec_calls.erase(cell2_content);
-        if (op_rec == "#ЗНАЧ!") {
-            
+         if (calculate_rec_calls.find(cell2_addr) != calculate_rec_calls.end()){
+            calculate_rec_calls.erase(key);
+            return "#VALUE!";
+        }
+        string op_rec = performCalculation(cell2_addr);
+
+        if (op_rec == "#VALUE!") {
+            calculate_rec_calls.erase(key);
+            return op_rec;
         }
         else {
             cell2_content = op_rec;
         }
+    }
+    else if (cell2_content == "#VALUE!") {
+        calculate_rec_calls.erase(key);
+        return "#VALUE!";
     }
 
     num1 = stoi(cell1_content);
@@ -215,12 +235,13 @@ string CSVReader::performCalculation(string key){
         break;
     case '/':
         if (num2 == 0)
-            return "#ЗНАЧ!";
+            return "#VALUE!";
         res = num1 / num2;
         break;
     default:
         break;
     }
 
+    calculate_rec_calls.erase(key);
     return to_string(res);
 }

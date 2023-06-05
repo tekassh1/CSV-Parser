@@ -29,5 +29,5 @@ public:
     bool parseCSV();
     void calculateCells();
 
-    string show();
+    void show();
 };

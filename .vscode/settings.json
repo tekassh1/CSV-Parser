@@ -6,6 +6,7 @@
         "deque": "cpp",
         "vector": "cpp",
         "ostream": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "*.tcc": "cpp"
     }
 }

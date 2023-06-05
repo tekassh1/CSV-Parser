@@ -9,6 +9,10 @@ void TableContainer::addElem(string column, string touple, string val){
     table_values[key] = val;
 };
 
+void TableContainer::addElem(string key, string val){
+    table_values[key] = val;
+};
+
 string TableContainer::getElem(string column, string touple){
     string key = column + touple;
     return table_values.at(key);
@@ -36,4 +40,8 @@ vector<string>& TableContainer::getToupleNumbers() {
 
 void TableContainer::removeElem(string key) {
     table_values.erase(key);
+}
+
+bool TableContainer::isExists(string key) {
+    return table_values.find(key) != table_values.end();
 }
