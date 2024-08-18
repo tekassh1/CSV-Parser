@@ -1,4 +1,4 @@
-## Yadro Telecom test task for C++ intership
+## C++ CSV parser 
 
 **For build**
 
